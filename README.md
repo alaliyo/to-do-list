@@ -9,7 +9,8 @@
 <h3>트러블 슈팅 해결</h3>
 <ol>
   <li>달력 구현을 어떻게 할 것이가? <a href="https://github.com/alaliyo/to-do-list/blob/main/src/components/ToDoListHeader.js">(해결)</a></li>
-  <li>이전 달로 넘어갔을 때 최대 일수를 어떻게 구현할 것인가</li>
+  <li>이전 달로 넘어갔을 때 달과 최대 일수변화 시 해당 달이 아닌 다른 날의 딸의 최대 일수를 불러옴.<br/>
+  (해결) setDate시 직접 달 부분에 +1 또는 -1을 함</li>
 
   ```javascript
   const [maxDate, setMaxDate] = useState(new Date(year, month, 0).getDate());
@@ -22,7 +23,8 @@
   setMaxDate(new Date(year, month + 1, 0).getDate());
   ```
 
-  <li>해달 달력에서 To-Do를 장성했을 때 어떻게 데이터 값으로 데이터 베이스에 넘기냐 (해결)</li>
+  <li>리모컨으로 날짜를 변경해고 글을 작성 시 데이터에 스케줄 날짜를 넣는데 불필요한 코드들이 많아짐<br/>
+    (해결) State로 선어하여 하나의 값이 계속 변경되게 하고 다른 부분에 선언하여 사용하는 것으로 해결</li>
   
   ```javascript
   const [scheduleDate, setScheduleDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
