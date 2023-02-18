@@ -70,8 +70,6 @@ function Header({ userObj, getDate }) {
         }
     }, [month > 12 || month < 1, calenderDate])
 
-    console.log(scheduleDate, calenderDate);
-
     // POST 입력
     const dataPost = async (e) => {
         e.preventDefault();
