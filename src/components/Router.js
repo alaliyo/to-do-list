@@ -6,10 +6,10 @@ function AppRouter({ loggedIn, userObj}) {
 
   return <Router>
     <Switch>
-      <Route path="/login">
+      <Route path={`${process.env.PUBLIC_URL}/login`}>
         <LogIn loggedIn={loggedIn}/>
       </Route>
-      <Route path="/">
+      <Route path={`${process.env.PUBLIC_URL}/`}>
         <ToDoList userObj={userObj} loggedIn={loggedIn} />
       </Route>
     </Switch>
