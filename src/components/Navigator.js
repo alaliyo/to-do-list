@@ -24,7 +24,7 @@ function Navigator({ userObj, loggedIn }) {
                             <Button variant="light" onClick={onLogOutClick}>로그아웃</Button>
                             </>
                         ) : (
-                            <Button variant="light" href={`${process.env.PUBLIC_URL}/login`}>
+                            <Button variant="light" href={`${process.env.PUBLIC_URL}/login/`}>
                                 로그인
                             </Button>
                         )}
