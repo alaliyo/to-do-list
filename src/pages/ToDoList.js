@@ -2,17 +2,21 @@ import styled from 'styled-components';
 import ToDoListHeader from '../components/ToDoListHeader';
 import Navigator from '../components/Navigator';
 import ToDoListBody from '../components/ToDoListBody';
+import { useState } from 'react';
 
 function ToDoList({ userObj, loggedIn }) {
-
+    const [lookupDate, setLookupDate] = useState("");
+    const getDate = (e) => {
+        setLookupDate(e)
+    }
 
     return (
         <div>
             <Navigator loggedIn={loggedIn} userObj={userObj} />
             <HeaderTitle>To-Do-List</HeaderTitle>
             <ToDoListBox>
-                <ToDoListHeader loggedIn={loggedIn} userObj={userObj}  />
-                <ToDoListBody userObj={userObj} />
+                <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDate={getDate} />
+                <ToDoListBody userObj={userObj} lookupDate={lookupDate} />
             </ToDoListBox>
         </div>
     )

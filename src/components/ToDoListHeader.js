@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { addDoc, collection } from "firebase/firestore";
@@ -7,13 +8,14 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
 
-function Header({ userObj }) {
+function Header({ userObj, getDate }) {
     const [schedule, setSchedule] = useState('');
     const [scheduleDate, setScheduleDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth()+1);
     const [date, setDate] = useState(new Date().getDate());
     const [maxDate, setMaxDate] = useState(new Date(year, month, 0).getDate());
+    const [calenderDate, setCalenderDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
 
     const onChange = (e) => {
         setSchedule(e.target.value);
@@ -29,6 +31,21 @@ function Header({ userObj }) {
         setScheduleDate(new Date(year, month-1, date+1).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'))
     }
 
+    const dateChang = (e) => {
+        setCalenderDate(e.target.value);
+    }
+
+    useEffect(() => {
+        setScheduleDate(new Date(calenderDate).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
+        setYear(new Date(calenderDate).getFullYear());
+        setMonth(new Date(calenderDate).getMonth()+1);
+        setDate(new Date(calenderDate).getDate());
+    }, [calenderDate])
+
+    useEffect(() => {
+        getDate(scheduleDate);
+    }, [date, calenderDate])
+
     useEffect(() => {
         if (date < 1) {
             setMonth(e => e - 1);
@@ -39,8 +56,7 @@ function Header({ userObj }) {
             setMaxDate(new Date(year, month + 1, 0).getDate());
             setDate(1);
         }
-        console.log(scheduleDate, year, month, date, maxDate);
-    }, [date < 1 || date > maxDate])
+    }, [date < 1 || date > maxDate, calenderDate])
 
     useEffect(() => {
         if (month > 12) {
@@ -52,17 +68,19 @@ function Header({ userObj }) {
             setMonth(12)
             setDate(31)
         }
-    }, [month > 12 || month < 1])
+    }, [month > 12 || month < 1, calenderDate])
+
+    console.log(scheduleDate, calenderDate);
 
     // POST 입력
-    const onSubmit = async (e) => {
+    const dataPost = async (e) => {
         e.preventDefault();
         try {
-            await addDoc(collection(dbService, "to-do-lists"), {
+            await addDoc(collection(dbService, userObj === null ? "to-do-list" : userObj.email), {
             text: schedule,
             userId: userObj.email,
             createdDate: scheduleDate,
-            chack: false
+            check: false
         });
         } catch (error) {
         }
@@ -71,16 +89,14 @@ function Header({ userObj }) {
 
     return (
         <div>
-            <Stack>
-                {year}/{month}
-            </Stack>
             <Stack direction="horizontal" gap={3}>
-                {date}
+                <TextBox><TextSpan>{year}/{month}/{date}</TextSpan></TextBox>
+                <input onChange={dateChang} type="date" />
                 <ArrowBox className="ms-auto" onClick={dateDown}>◀</ArrowBox>
                 <ArrowBox onClick={dateUp}>▶</ArrowBox>
             </Stack>
             <ToDoInputBox>
-                <Form onSubmit={onSubmit}>
+                <Form onSubmit={dataPost}>
                     <InputGroup className="mb-3">
                         <Form.Control
                         onChange={onChange} value={schedule} type="text"
@@ -105,11 +121,11 @@ const ToDoInputBox = styled.div`
 `
 
 const ArrowBox = styled.button`
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     background-color: white;
     text-align : center;
-    border-radius: 15px;
+    border-radius: 16px;
     border: 2px solid gray;
     cursor: pointer;
     &:hover {
@@ -117,4 +133,13 @@ const ArrowBox = styled.button`
         background-color: gray;
         transition: 0.5s;
     }
+`
+
+const TextBox = styled.div`
+    margin-left: 20px;
+`
+
+const TextSpan = styled.span`
+    font-size: 20px;
+    font-weight: bold;
 `

@@ -7,11 +7,13 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Badge from 'react-bootstrap/Badge';
 
-function ToDo({ toDoObj, isOwner }) {
+function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
     const [edit, setEdit] = useState(false);
     const [newToDo, setnewToDo] = useState(toDoObj.text);
-    const  ToDoTextRef =  doc(dbService, "to-do-lists", `${toDoObj.id}`);
+    const [check, setCheck] = useState(toDoObj.check);
+    const  ToDoTextRef =  doc(dbService, userObj === null ? "to-do-list" : userObj.email, `${toDoObj.id}`);
 
     const onDeleteClick = async() => {
         const ok = window.confirm("삭제하시겠습니까?");
@@ -22,12 +24,12 @@ function ToDo({ toDoObj, isOwner }) {
 
     const toggleEduting = () => setEdit((prev => !prev));
 
-    const onSubmit = async(e) => {
+    const onPut = async(e) => {
         e.preventDefault();
         await updateDoc(ToDoTextRef, {
             text: newToDo,
             });
-            setEdit((prev => !prev));
+            setEdit((prev => !prev))
     }
 
     const onChange = (e) => {
@@ -36,28 +38,38 @@ function ToDo({ toDoObj, isOwner }) {
         } = e;
         setnewToDo(value);
     };
+
+    const onCheck = async(e) => {
+        e.preventDefault();
+        await updateDoc(ToDoTextRef, {
+            check: !check,
+            });
+            setCheck(prev => !prev)
+    }
+ 
     
     return (
         <div>
             {edit ? (
-                <Form onSubmit={onSubmit}>
-                    <InputGroup className="mb-3">
-                        <Form.Control
-                            onChange={onChange} value={newToDo} type="text"
-                            placeholder="수정할 내용을 적어주세요"
-                            maxLength="50"
-                        />
-                        <Button onClick={toggleEduting} variant="outline-secondary" id="button-addon2" type="submit">
-                        완료
-                        </Button>
-                        <Button variant="outline-secondary" id="button-addon2" onClick={toggleEduting}>취소</Button>
-                    </InputGroup>
-                </Form>
+                <ToDoBox>
+                    <Form>
+                        <InputGroup>
+                            <Form.Control
+                                onChange={onChange} value={newToDo} type="text"
+                                placeholder="수정할 내용을 적어주세요"
+                                maxLength="50"
+                            />
+                            <Button onClick={onPut} variant="outline-secondary" id="button-addon2" type="submit">완료</Button>
+                            <Button variant="outline-secondary" id="button-addon2" type="button" onClick={toggleEduting}>취소</Button>
+                        </InputGroup>
+                    </Form>
+                </ToDoBox>
             ) : (
-                isOwner && (
+                isOwner && DateOwner && (
                     <ToDoBox>
                         <Stack direction="horizontal" gap={3}>
-                            <h4>{newToDo}</h4>
+                            <Badgebox onClick={onCheck}>{check? <Badge bg="success">완료</Badge> : <Badge bg="danger">진행중</Badge>}</Badgebox>
+                            {check ? <h4><del>{newToDo}</del></h4> : <h4>{newToDo}</h4>}
                             <Button className="ms-auto" variant="outline-secondary" onClick={toggleEduting}>수정</Button>
                             <CloseButton onClick={onDeleteClick} />
                         </Stack>
@@ -76,4 +88,10 @@ const ToDoBox = styled.div`
     padding: 10px;
     margin-bottom: 10px;
     background-color: white;
+`
+
+const Badgebox = styled.button`
+    background-color: white;
+    border: 0;
+    margin-bottom: 5px;
 `

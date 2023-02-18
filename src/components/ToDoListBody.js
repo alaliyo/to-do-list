@@ -3,13 +3,13 @@ import { dbService } from '../firebase';
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import ToDo from "./ToDo";
 
-function ToDoListBody({ userObj }) {
+function ToDoListBody({ userObj, lookupDate }) {
     const [toDoList, setToDoList] = useState([]);
 
     // Get
     useEffect(() => {
         const q = query(
-            collection(dbService, "to-do-lists"),
+            collection(dbService, userObj === null ? "to-do-list" : userObj.email),
             orderBy("userId", "desc")
         );
         onSnapshot(q, (snapshot) => {
@@ -19,12 +19,12 @@ function ToDoListBody({ userObj }) {
             }));
         setToDoList(toDoListArr);
         });
-    }, [])
+    }, [userObj])
 
     return (
         <div>
             {userObj === null ? null : toDoList.map(e => (
-                <ToDo key={e.id} toDoObj={e} isOwner={e.userId === userObj.email}/>
+                <ToDo key={e.id} toDoObj={e} userObj={userObj} isOwner={e.userId === userObj.email} DateOwner={lookupDate === e.createdDate}/>
             ))}
         </div>
     );
