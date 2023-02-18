@@ -4,12 +4,12 @@ import LogIn from '../pages/LogIn'
 
 function AppRouter({ loggedIn, userObj}) {
 
-  return <Router basename={process.env.PUBLIC_URL}>
+  return <Router>
     <Switch>
-      <Route path="/login">
+      <Route path={`${process.env.PUBLIC_URL}/login/`} element={< LogIn />}>
         <LogIn loggedIn={loggedIn}/>
       </Route>
-      <Route path="/">
+      <Route path={`${process.env.PUBLIC_URL}/`} element={< ToDoList />}>
         <ToDoList userObj={userObj} loggedIn={loggedIn} />
       </Route>
     </Switch>
