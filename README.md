@@ -44,3 +44,24 @@
   
 </ol>
 </details>
+
+
+<h3>2. 첫 배포</h3>
+<details>
+<h4> - 히스토리를 보면 알 수 있지만 많은 시도가 있었다. 여기서 여러가지 문제가 발생했었다. 그러면서 알게 된점.</h4>
+<ol>
+<li>github page는 한 index만 지원한다. BrowserRouter로 주소를 2개 이상 만들게 되면 메인 페이지를 제외한 다른 페지이는 404가 뜬다. </li>
+<li>BrowserRouter를 배포하게 되면 새로고침 또는 다른 페이지 이동시 404가 뜬다.(해결 코드) firebase.json에 적용</li>
+
+```
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+```
+
+<li> 배포는 빌드를 한 후 빌드 파일을 올려야 적용이 된다.</li>
+</ol>
+</details>
