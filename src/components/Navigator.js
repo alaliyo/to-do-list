@@ -14,7 +14,7 @@ function Navigator({ userObj, loggedIn }) {
     return (
         <Navbar>
             <Container>
-                <Navbar.Brand href="/">To Do List</Navbar.Brand>
+                <Navbar.Brand href="/to-do-list/">To Do List</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
@@ -24,7 +24,7 @@ function Navigator({ userObj, loggedIn }) {
                             <Button variant="light" onClick={onLogOutClick}>로그아웃</Button>
                             </>
                         ) : (
-                            <Button variant="light" href="/login">
+                            <Button variant="light" href="/to-do-list/login">
                                 로그인
                             </Button>
                         )}

@@ -19,7 +19,7 @@ function LogIn({ loggedIn }) {
     const [account, setAccount] = useState(false);
     const [errors, setErrors] = useState("")
 
-    if (loggedIn) window.location.replace("/");
+    if (loggedIn) window.location.replace("/to-do-list/");
 
     const onChange = (e) => {
         const {
@@ -69,7 +69,7 @@ function LogIn({ loggedIn }) {
         <div>
             <Navbar>
                 <Container>
-                    <Navbar.Brand href="/">To Do List</Navbar.Brand>
+                    <Navbar.Brand href="/to-do-list/">To Do List</Navbar.Brand>
                 </Container>
             </Navbar>
 
