@@ -69,7 +69,7 @@ function LogIn({ loggedIn }) {
         <div>
             <Navbar>
                 <Container>
-                    <Navbar.Brand href="/to-do-list/">To Do List</Navbar.Brand>
+                    <Navbar.Brand href={`${process.env.PUBLIC_URL}/`}>To Do List</Navbar.Brand>
                 </Container>
             </Navbar>
 

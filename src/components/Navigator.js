@@ -8,13 +8,13 @@ function Navigator({ userObj, loggedIn }) {
     const onLogOutClick = () => {
         console.log("반응")
         authService.signOut();
-        window.location.reload("/");
+        window.location.reload(`${process.env.PUBLIC_URL}/`);
     }
 
     return (
         <Navbar>
             <Container>
-                <Navbar.Brand href="/to-do-list/">To Do List</Navbar.Brand>
+                <Navbar.Brand href={`${process.env.PUBLIC_URL}/`}>To Do List</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
@@ -24,7 +24,7 @@ function Navigator({ userObj, loggedIn }) {
                             <Button variant="light" onClick={onLogOutClick}>로그아웃</Button>
                             </>
                         ) : (
-                            <Button variant="light" href="/to-do-list/login">
+                            <Button variant="light" href={`${process.env.PUBLIC_URL}/login`}>
                                 로그인
                             </Button>
                         )}
