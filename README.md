@@ -22,12 +22,12 @@
       <li>완료, 진행중 체크 버튼 구현 및 true, false 데이터 값을 저장 후 get 했을 때도 적용</li>
       <li>input date type에도 날짜 이동하고 게시물 불러 오는 기능 구현</li>
       <li>firebase에 배포</li>
+      <li>footer 생성</li>
     </details>
   </ol>
     <ol>
     <h3>(계획)</h3>
     <details>
-      <li>footer 생성</li>
       <li>업데이트 페이지 생성 및 버전 알림</li>
       <li>와이어 프레임 및 설계 단계 안 한 부분들 작성</li>
       <li>비밀번호 변경 및 찾기, 계정 탈퇴 기능</li>
