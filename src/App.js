@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import AppRouter from './components/Router';
 import { authService } from './firebase';
+import AppRouter from './components/Router';
+import Footer from './components/Footer';
 
 function App() {
   const [init, setInit] = useState(false);
@@ -21,6 +22,7 @@ function App() {
   return (
     <div>
       { init ? <AppRouter userObj={userObj} loggedIn={loggedIn}></AppRouter> : <LodingBox><h1>...Loading</h1></LodingBox> }
+      <Footer />
     </div>
   )
 }

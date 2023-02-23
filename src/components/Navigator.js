@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
@@ -19,7 +20,7 @@ function Navigator({ userObj, loggedIn }) {
                     <Navbar.Text>
                         {loggedIn ? (
                             <>
-                            <span>{userObj.email}님 환영합니다.</span>
+                            <EmailText>{userObj.email}</EmailText>
                             <Button variant="light" onClick={onLogOutClick}>로그아웃</Button>
                             </>
                         ) : (
@@ -35,3 +36,7 @@ function Navigator({ userObj, loggedIn }) {
 }
 
 export default Navigator;
+
+const EmailText = styled.span`
+  margin-right: 10px;
+`

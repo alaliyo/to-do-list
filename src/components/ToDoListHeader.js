@@ -33,6 +33,7 @@ function Header({ userObj, getDate }) {
 
     const dateChang = (e) => {
         setCalenderDate(e.target.value);
+        e.target.value = "";
     }
 
     useEffect(() => {
