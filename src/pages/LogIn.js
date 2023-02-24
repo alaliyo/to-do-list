@@ -7,8 +7,6 @@ import {
     } from 'firebase/auth';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import Stack from 'react-bootstrap/Stack';
 import Alert from 'react-bootstrap/Alert';
 
@@ -67,12 +65,6 @@ function LogIn({ loggedIn }) {
 
     return (
         <div>
-            <Navbar>
-                <Container>
-                    <Navbar.Brand href="/">To Do List</Navbar.Brand>
-                </Container>
-            </Navbar>
-
             <LogInBox>
                 <Form gap={3} onSubmit={onSubmit}>
                     <h3>{account ? "회원가입" : "로그인"}</h3>

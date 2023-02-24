@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { authService } from './firebase';
 import AppRouter from './components/Router';
 import Footer from './components/Footer';
+import Navigator from './components/Navigator';
 
 function App() {
   const [init, setInit] = useState(false);
@@ -21,8 +22,9 @@ function App() {
 
   return (
     <div>
+      { init && <Navigator loggedIn={loggedIn} userObj={userObj} /> }
       { init ? <AppRouter userObj={userObj} loggedIn={loggedIn}></AppRouter> : <LodingBox><h1>...Loading</h1></LodingBox> }
-      <Footer />
+      { init && <Footer /> }
     </div>
   )
 }

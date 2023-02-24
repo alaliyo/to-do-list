@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ToDoListHeader from '../components/ToDoListHeader';
-import Navigator from '../components/Navigator';
 import ToDoListBody from '../components/ToDoListBody';
 import { useState } from 'react';
 
@@ -12,7 +11,6 @@ function ToDoList({ userObj, loggedIn }) {
 
     return (
         <div>
-            <Navigator loggedIn={loggedIn} userObj={userObj} />
             <HeaderTitle>To-Do-List</HeaderTitle>
             <ToDoListBox>
                 <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDate={getDate} />
