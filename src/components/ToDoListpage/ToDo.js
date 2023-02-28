@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {  doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { dbService } from '../firebase';
+import { dbService } from '../../firebase';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -69,7 +69,7 @@ function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
                     <ToDoBox>
                         <Stack direction="horizontal" gap={3}>
                             <Badgebox onClick={onCheck}>{check? <Badge bg="success">완료</Badge> : <Badge bg="danger">진행중</Badge>}</Badgebox>
-                            {check ? <h4><del>{newToDo}</del></h4> : <h4>{newToDo}</h4>}
+                            {check ? <ContentsText><del>{newToDo}</del></ContentsText> : <ContentsText>{newToDo}</ContentsText>}
                             <Button className="ms-auto" variant="outline-secondary" onClick={toggleEduting}>수정</Button>
                             <CloseButton onClick={onDeleteClick} />
                         </Stack>
@@ -95,3 +95,8 @@ const Badgebox = styled.button`
     border: 0;
     margin-bottom: 5px;
 `
+
+const ContentsText = styled.span`
+    font-size: 19px;
+    font-weight: 900;
+` 

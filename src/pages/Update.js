@@ -1,13 +1,24 @@
 import styled from 'styled-components';
-import Table from 'react-bootstrap/Table';
+import UpdateModal from '../components/Updatepage/UpdateModal';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import Stack from 'react-bootstrap/Stack';
+import Table from 'react-bootstrap/Table';
 
-function Update() {
+function Update({ userObj, loggedIn}) {
+    if(loggedIn === false) {
+        alert('로그인 후 사용 가능합니다')
+        window.location.href="/login"
+    }
+    
     return(
         <TableBox>
+            { loggedIn && <>
             <VPageTitleBox>
-                <VPageTitle>Update History</VPageTitle>
+                <Stack direction="horizontal" gap={4}>
+                    <VPageTitle>Update History</VPageTitle>
+                    { userObj.email && <UpdateModal userObj={userObj}>Secondary</UpdateModal> }
+                </Stack>
             </VPageTitleBox>
             <Table striped>
                 <thead>
@@ -53,6 +64,7 @@ function Update() {
 
                 </tbody>
             </Table>
+            </>}
         </TableBox>
     );
 }

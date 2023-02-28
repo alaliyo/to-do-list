@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ToDoListHeader from '../components/ToDoListHeader';
-import ToDoListBody from '../components/ToDoListBody';
+import ToDoListHeader from '../components/ToDoListpage/ToDoListHeader';
+import ToDoListBody from '../components/ToDoListpage/ToDoListBody';
 import { useState } from 'react';
 
 function ToDoList({ userObj, loggedIn }) {

@@ -7,7 +7,7 @@ function DorpdownMenu() {
     
     const onLogOutClick = () => {
         authService.signOut();
-        window.location.reload("/");
+        window.location.href="/"
     }
 
     return (

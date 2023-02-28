@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { dbService } from '../firebase';
+import { dbService } from '../../firebase';
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import ToDo from "./ToDo";
 

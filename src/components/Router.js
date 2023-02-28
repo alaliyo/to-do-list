@@ -8,7 +8,7 @@ function AppRouter({ loggedIn, userObj}) {
   return <Router>
     <Switch>
       <Route path="/update" >
-        <Update userObj={userObj} loggedIn={loggedIn} />
+        <Update loggedIn={loggedIn} userObj={userObj} />
       </Route>
       <Route path="/login" >
         <LogIn loggedIn={loggedIn}/>

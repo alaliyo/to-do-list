@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { addDoc, collection } from "firebase/firestore";
-import { dbService } from '../firebase';
+import { dbService } from '../../firebase';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
