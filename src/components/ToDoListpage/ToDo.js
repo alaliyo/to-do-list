@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {  doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { dbService } from '../../firebase';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
