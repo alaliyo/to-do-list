@@ -5,7 +5,7 @@
 <br/>
 
 ## 링크
-<a href="to-do-list-5d16b.firebaseapp.com">to-do-list-5d16b.firebaseapp.com</a>
+<a href="https://to-do-list-5d16b.firebaseapp.com/">to-do-list-5d16b.firebaseapp.com</a>
 
 <br/>
 
@@ -24,14 +24,16 @@
       <li>firebase에 배포</li>
       <li>footer 생성</li>
       <li>업데이트 페이지 생성 및 버전 알림</li>
+      <li>admin 계정 및 업데이트 테이블 및 계시물 생성</li>
     </details>
   </ol>
     <ol>
     <h3>(계획)</h3>
     <details>
-      <li>admin 계정 및 업데이트 테이블 및 계시물 생성</li>
       <li>비밀번호 변경 및 찾기, 계정 탈퇴 기능</li>
       <li>모바일에서 접속 시 반응형으로 사용하기 편하게 디자인 변경</li>
+      <li>완료하지 못한 스케줄 확인할 수 있는 페이지 완성</li>
+      <li>시간 바 넣는 기능 구현</li>
     </details>
   </ol>
 </details>
