@@ -13,7 +13,7 @@ function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
     const [edit, setEdit] = useState(false);
     const [newToDo, setnewToDo] = useState(toDoObj.text);
     const [check, setCheck] = useState(toDoObj.check);
-    const  ToDoTextRef =  doc(dbService, userObj === null ? "to-do-list" : userObj.email, `${toDoObj.id}`);
+    const ToDoTextRef = doc(dbService, userObj === null ? "to-do-list" : userObj.email, `${toDoObj.id}`);
 
     const onDeleteClick = async() => {
         const ok = window.confirm("삭제하시겠습니까?");

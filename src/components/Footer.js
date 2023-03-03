@@ -6,12 +6,9 @@ function Footer() {
             <FlexBox>
                 <TextBox>Title: to-do-list</TextBox>
                 <TextBox>Producer: 김성원</TextBox>
-                <TextBox>Version: v1.0.0</TextBox>
             </FlexBox>
             <FlexBox>
-                <TextBox>지금은 베타 버전입니다.</TextBox>
-                <TextBox>회원 탈퇴 및 비밀번호 변경 문의는</TextBox>
-                <TextBox>des321321@daum.net</TextBox>
+                <TextBox>Version: v1.2.0</TextBox>
             </FlexBox>
         </FooterBox>
     )

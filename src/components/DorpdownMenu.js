@@ -4,9 +4,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function DorpdownMenu() {
-    
     const onLogOutClick = () => {
         authService.signOut();
+        alert("로그아웃 되었습니다.")
         window.location.href="/"
     }
 

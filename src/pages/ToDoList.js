@@ -5,9 +5,7 @@ import { useState } from 'react';
 
 function ToDoList({ userObj, loggedIn }) {
     const [lookupDate, setLookupDate] = useState("");
-    const getDate = (e) => {
-        setLookupDate(e)
-    }
+    const getDate = (e) => { setLookupDate(e) }
 
     return (
         <div>

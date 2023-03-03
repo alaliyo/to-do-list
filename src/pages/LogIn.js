@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Alert from 'react-bootstrap/Alert';
+import FindPassword from '../components/FindPassword';
 
 function LogIn({ loggedIn }) {
     const [email, setEmail] = useState("");
@@ -68,7 +69,10 @@ function LogIn({ loggedIn }) {
             <LogInBox>
                 <Form gap={3} onSubmit={onSubmit}>
                     <h3>{account ? "회원가입" : "로그인"}</h3>
-                    {account && <Explanation>회원가입시 자동 로그인됩니다.</Explanation>}
+                    {account && (<>
+                        <Explanation>기존 이메일을 아이디로 사용해야 비밀번호 찾기가 가능합니다. </Explanation>
+                        <Explanation>회원가입시 자동 로그인됩니다.</Explanation>
+                        </>)}
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>아이디</Form.Label>
@@ -91,7 +95,8 @@ function LogIn({ loggedIn }) {
 
                     {errors !== '' && <Alert variant="danger">{errors}</Alert>}
                     
-                    <Stack gap={1}>
+                    <Stack direction="horizontal">
+                        {!account && <FindPassword />}
                         <Button className='ms-auto' variant="light" type="submit" >
                             {account ? "가입" : "로그인"}
                         </Button>
@@ -119,8 +124,9 @@ const LogInBox = styled.div`
     border-radius: 20px;
 `
 
-const Explanation = styled.span`
+const Explanation = styled.p`
     font-size: 12px;
     color: rgb(255, 90, 90);
     font-weight: 900;
+    margin-bottom: 3px;
 `

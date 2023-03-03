@@ -10,7 +10,6 @@ import Table from 'react-bootstrap/Table';
 
 function UpdateContents({ userObj, loggedIn }) {
     const [updateList, setUpdateList] = useState([]);
-    console.log(updateList)
 
     // Get
     useEffect(() => {
@@ -32,9 +31,9 @@ function UpdateContents({ userObj, loggedIn }) {
             <VPageTitleBox>
                 <Stack direction="horizontal" gap={4}>
                     <VPageTitle>Update History <VPageEx> (열을 클릭해 상세 내용을 확인하세요)</VPageEx></VPageTitle>
-                    { userObj.email === "des321321@naver.com" && <UpdateModal userObj={userObj}></UpdateModal> }
+                    { userObj.email === "des321321@naver.com" && <UpdateModal userObj={userObj} upListLen={updateList.length}></UpdateModal> }
                 </Stack>
-            </VPageTitleBox>
+            </VPageTitleBox >
             <Table striped>
                 <thead>
                     <tr>
@@ -56,7 +55,7 @@ function UpdateContents({ userObj, loggedIn }) {
                                 </Popover>
                             }>
                             <tr>
-                                <td>{i}</td>
+                                <td>{i+1}</td>
                                 <td>{e.versionNum}</td>
                                 <td>{e.versionTitle}</td>
                             </tr>

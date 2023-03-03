@@ -29,7 +29,7 @@ function MyVerticallyCenteredModal( props ) {
       e.preventDefault();
       try {
           await addDoc(collection(dbService, props.admin === null ? "to-do-list" : "version"), {
-            versId: 1,
+            versId: props.upListLen + 1,
             versionNum: vNumber,
             versionTitle: vTitle,
             versionContents: vContents
@@ -80,7 +80,7 @@ function MyVerticallyCenteredModal( props ) {
   );
 }
 
-function UpdateModal({ userObj }) {
+function UpdateModal({ userObj, upListLen }) {
     const [modalShow, setModalShow] = useState(false);
 
     return(
@@ -91,6 +91,7 @@ function UpdateModal({ userObj }) {
 
             <MyVerticallyCenteredModal
                 admin = {userObj}
+                upListLen = {upListLen}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
