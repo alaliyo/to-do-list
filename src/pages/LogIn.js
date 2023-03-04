@@ -68,7 +68,7 @@ function LogIn({ loggedIn }) {
         <div>
             <LogInBox>
                 <Form gap={3} onSubmit={onSubmit}>
-                    <h3>{account ? "회원가입" : "로그인"}</h3>
+                    <LoginTitle>{account ? "회원가입" : "로그인"}</LoginTitle>
                     {account && (<>
                         <Explanation>기존 이메일을 아이디로 사용해야 비밀번호 찾기가 가능합니다. </Explanation>
                         <Explanation>회원가입시 자동 로그인됩니다.</Explanation>
@@ -115,6 +115,12 @@ function LogIn({ loggedIn }) {
 
 export default LogIn;
 
+const LoginTitle = styled.h3`
+    @media screen and (max-width: 768px) {
+        font-size: 0;
+    }
+`
+
 const LogInBox = styled.div`
     background-color: rgb(240, 240, 240);
     padding: 50px;
@@ -122,6 +128,14 @@ const LogInBox = styled.div`
     margin: 0 auto;
     margin-top: 100px;
     border-radius: 20px;
+    @media screen and (max-width: 768px) {
+        width: 100vw;
+        padding: 15px;
+        margin: 0px;
+        input {
+            width:90vw;
+        }
+    }
 `
 
 const Explanation = styled.p`

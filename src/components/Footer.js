@@ -8,7 +8,7 @@ function Footer() {
                 <TextBox>Producer: 김성원</TextBox>
             </FlexBox>
             <FlexBox>
-                <TextBox>Version: v1.2.0</TextBox>
+                <TextBox>Version: v1.2.1</TextBox>
             </FlexBox>
         </FooterBox>
     )
