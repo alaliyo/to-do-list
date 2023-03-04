@@ -10,6 +10,14 @@ function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [dispWidSize, setDispWidSize] = useState(window.innerWidth);
+
+  useEffect(()=> {
+    const windowResize = () => {
+      setDispWidSize(window.innerWidth)
+    }
+    window.addEventListener(`resize`, windowResize);
+  }, []);
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -23,8 +31,8 @@ function App() {
 
   return (
     <div>
-      { init && <Navigator loggedIn={loggedIn} userObj={userObj} /> }
-      { init ? <AppRouter userObj={userObj} loggedIn={loggedIn}></AppRouter> : 
+      { init && <Navigator loggedIn={loggedIn} userObj={userObj} dispWidSize={dispWidSize} /> }
+      { init ? <AppRouter userObj={userObj} loggedIn={loggedIn} dispWidSize={dispWidSize} ></AppRouter> : 
         <LodingBox><Spinner animation="border" variant="secondary" /></LodingBox> }
       { init && <Footer /> }
     </div>

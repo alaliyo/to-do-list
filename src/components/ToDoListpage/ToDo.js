@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Badge from 'react-bootstrap/Badge';
 
-function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
+function ToDo({ dispWidSize, toDoObj, isOwner, DateOwner, userObj }) {
     const [edit, setEdit] = useState(false);
     const [newToDo, setnewToDo] = useState(toDoObj.text);
     const [check, setCheck] = useState(toDoObj.check);
@@ -46,7 +46,6 @@ function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
             });
             setCheck(prev => !prev)
     }
- 
     
     return (
         <div>
@@ -67,7 +66,7 @@ function ToDo({ toDoObj, isOwner, DateOwner, userObj }) {
             ) : (
                 isOwner && DateOwner && (
                     <ToDoBox>
-                        <Stack direction="horizontal" gap={3}>
+                        <Stack direction="horizontal" gap={dispWidSize > 768 ? 3 : 1}>
                             <Badgebox onClick={onCheck}>{check? <Badge bg="success">완료</Badge> : <Badge bg="danger">진행중</Badge>}</Badgebox>
                             {check ? <ContentsText><del>{newToDo}</del></ContentsText> : <ContentsText>{newToDo}</ContentsText>}
                             <Button className="ms-auto" variant="outline-secondary" onClick={toggleEduting}>수정</Button>
@@ -88,6 +87,9 @@ const ToDoBox = styled.div`
     padding: 10px;
     margin-bottom: 10px;
     background-color: white;
+    @media screen and (max-width: 768px) {
+        padding: 5px
+    }
 `
 
 const Badgebox = styled.button`
@@ -99,4 +101,7 @@ const Badgebox = styled.button`
 const ContentsText = styled.span`
     font-size: 19px;
     font-weight: 900;
+    @media screen and (max-width: 768px) {
+        font-size: 15px
+    }
 ` 

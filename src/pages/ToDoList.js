@@ -3,7 +3,7 @@ import ToDoListHeader from '../components/ToDoListpage/ToDoListHeader';
 import ToDoListBody from '../components/ToDoListpage/ToDoListBody';
 import { useState } from 'react';
 
-function ToDoList({ userObj, loggedIn }) {
+function ToDoList({ userObj, loggedIn, dispWidSize }) {
     const [lookupDate, setLookupDate] = useState("");
     const getDate = (e) => { setLookupDate(e) }
 
@@ -12,7 +12,7 @@ function ToDoList({ userObj, loggedIn }) {
             <HeaderTitle>To-Do-List</HeaderTitle>
             <ToDoListBox>
                 <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDate={getDate} />
-                <ToDoListBody userObj={userObj} lookupDate={lookupDate} />
+                <ToDoListBody userObj={userObj} lookupDate={lookupDate} dispWidSize={dispWidSize} />
             </ToDoListBox>
         </div>
     )
@@ -26,6 +26,11 @@ const ToDoListBox = styled.div`
     margin: 0px 10%;
     background-color: #ffeedd;
     border-radius: 15px;
+    @media screen and (max-width: 768px) {
+        padding: 0px;
+        padding-top: 10px;
+        margin: 0px;
+    }
 `
 
 const HeaderTitle = styled.h2`

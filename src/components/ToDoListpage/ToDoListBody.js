@@ -3,7 +3,7 @@ import { dbService } from '../../firebase';
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import ToDo from "./ToDo";
 
-function ToDoListBody({ userObj, lookupDate }) {
+function ToDoListBody({ userObj, lookupDate, dispWidSize }) {
     const [toDoList, setToDoList] = useState([]);
 
     // Get
@@ -24,7 +24,7 @@ function ToDoListBody({ userObj, lookupDate }) {
     return (
         <div>
             {userObj === null ? null : toDoList.map(e => (
-                <ToDo key={e.id} toDoObj={e} userObj={userObj} isOwner={e.userId === userObj.email} DateOwner={lookupDate === e.createdDate}/>
+                <ToDo key={e.id} dispWidSize={dispWidSize} toDoObj={e} userObj={userObj} isOwner={e.userId === userObj.email} DateOwner={lookupDate === e.createdDate}/>
             ))}
         </div>
     );

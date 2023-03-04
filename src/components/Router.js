@@ -3,7 +3,7 @@ import ToDoList from '../pages/ToDoList';
 import LogIn from '../pages/LogIn';
 import Update from '../pages/Update';
 
-function AppRouter({ loggedIn, userObj}) {
+function AppRouter({ loggedIn, userObj, dispWidSize}) {
 
   return <Router>
     <Switch>
@@ -14,7 +14,7 @@ function AppRouter({ loggedIn, userObj}) {
         <LogIn loggedIn={loggedIn}/>
       </Route>
       <Route path="/" >
-        <ToDoList userObj={userObj} loggedIn={loggedIn} />
+        <ToDoList userObj={userObj} loggedIn={loggedIn} dispWidSize={dispWidSize} />
       </Route>
     </Switch>
   </Router>;

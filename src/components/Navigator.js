@@ -9,7 +9,7 @@ import DorpdownMenu from './DorpdownMenu';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-function Navigator({ userObj, loggedIn }) {
+function Navigator({ userObj, loggedIn, dispWidSize }) {
 
   // 비밀번호 변경 클릭 시 비밀번호 이메일 요청
   const changePasswordUsingEmail = async () => {
@@ -42,7 +42,7 @@ function Navigator({ userObj, loggedIn }) {
   };
 
   const CustomToggle = React.forwardRef(({ onClick }, ref) => (
-    <EmailText ref={ref} onClick={(e) => {onClick(e);}}>{userObj.email}</EmailText>
+    <EmailText ref={ref} onClick={(e) => {onClick(e);}}>{ dispWidSize > 768 ? userObj.email : userObj.email.split('@')[0]}</EmailText>
   ));
 
 
@@ -63,7 +63,7 @@ function Navigator({ userObj, loggedIn }) {
                                 <Dropdown.Item eventKey="2" onClick={secession}>회원탈퇴</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        <DorpdownMenu />
+                        <DorpdownMenu dispWidSize={dispWidSize} />
                         </>
                     ) : (
                         <Navbar.Text>
