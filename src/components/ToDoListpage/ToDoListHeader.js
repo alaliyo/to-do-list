@@ -3,19 +3,21 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { addDoc, collection } from "firebase/firestore";
 import { dbService } from '../../firebase';
+import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
 
-function Header({ userObj, getDate }) {
+
+function Header({ userObj, getDates }) {
     const [schedule, setSchedule] = useState('');
     const [scheduleDate, setScheduleDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
-    const [year, setYear] = useState(new Date().getFullYear());
-    const [month, setMonth] = useState(new Date().getMonth()+1);
-    const [date, setDate] = useState(new Date().getDate());
-    const [maxDate, setMaxDate] = useState(new Date(year, month, 0).getDate());
-    const [calenderDate, setCalenderDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
+    const [year, setYear] = useState(Number(moment().format('YYYY')));
+    const [month, setMonth] = useState(Number(moment().format('M')));
+    const [date, setDate] = useState(Number(moment().format('D')));
+    const [maxDate, setMaxDate] = useState(Number(moment().endOf('month').format('D')));
+    const [calenderDate, setCalenderDate] = useState(new Date());
 
     const onChange = (e) => {
         setSchedule(e.target.value);
@@ -23,13 +25,45 @@ function Header({ userObj, getDate }) {
 
     const dateDown = () => {
         setDate(e => e - 1);
-        setScheduleDate(new Date(year, month-1, date-1).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'))
+        setScheduleDate(new Date(year, month-1, date-1).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
+        setMaxDate(Number(moment(`${year}/${month}/01`).endOf('month').format('D')));
     }
 
     const dateUp = () => {
         setDate(e => e + 1);
-        setScheduleDate(new Date(year, month-1, date+1).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'))
+        setScheduleDate(new Date(year, month-1, date+1).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
+        setMaxDate(Number(moment(`${year}/${month}/01`).endOf('month').format('D')));
     }
+
+    useEffect(() => {
+        getDates(scheduleDate);
+    }, [date, calenderDate]);
+
+    useEffect(() => {
+        if (date < 1) {
+            setMonth(e => e - 1);
+            setMaxDate((moment(`${year}/${month-1}/01`).endOf('month').format('D')));
+            setDate((moment(`${year}/${month-1}/01`).endOf('month').format('D')));
+        } else if (date > maxDate) {
+            setMonth(e => e + 1);
+            setMaxDate((moment(`${year}/${month+1}/01`).endOf('month').format('D')));
+            setDate(1);
+        }
+    }, [date])
+
+    useEffect(() => {
+        if (month > 12) {
+            setYear(e => e + 1);
+            setMonth(1);
+            setDate(1);
+            setMaxDate((moment(`${year}/${month}/01`).endOf('month').format('D')));
+        } else if (month < 1) {
+            setYear(e => e - 1);
+            setMonth(12);
+            setDate(31);
+            setMaxDate((moment(`${year}/${month}/31`).endOf('month').format('D')));
+        }
+    }, [date]);
 
     const dateChang = (e) => {
         setCalenderDate(e.target.value);
@@ -38,38 +72,11 @@ function Header({ userObj, getDate }) {
 
     useEffect(() => {
         setScheduleDate(new Date(calenderDate).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
-        setYear(new Date(calenderDate).getFullYear());
-        setMonth(new Date(calenderDate).getMonth()+1);
-        setDate(new Date(calenderDate).getDate());
-    }, [calenderDate])
-
-    useEffect(() => {
-        getDate(scheduleDate);
-    }, [date, calenderDate])
-
-    useEffect(() => {
-        if (date < 1) {
-            setMonth(e => e - 1);
-            setMaxDate(new Date(year, month-1, 0).getDate());
-            setDate(new Date(year, month-1, 0).getDate());
-        } else if (date > maxDate) {
-            setMonth(e => e + 1);
-            setMaxDate(new Date(year, month + 1, 0).getDate());
-            setDate(1);
-        }
-    }, [date < 1 || date > maxDate, calenderDate])
-
-    useEffect(() => {
-        if (month > 12) {
-            setYear(e => e + 1);
-            setMonth(1)
-            setDate(1)
-        } else if (month < 1) {
-            setYear(e => e - 1);
-            setMonth(12)
-            setDate(31)
-        }
-    }, [month > 12 || month < 1, calenderDate])
+        setMaxDate(Number(moment(calenderDate).endOf('month').format('D')));
+        setYear(Number(moment(calenderDate).format('YYYY')));
+        setMonth(Number(moment(calenderDate).format('M')));
+        setDate(Number(moment(calenderDate).format('D')));
+    }, [calenderDate]);
 
     // POST 입력
     const dataPost = async (e) => {
@@ -84,7 +91,7 @@ function Header({ userObj, getDate }) {
         } catch (error) {
         }
         setSchedule("");
-    };
+    }
 
     return (
         <div>
@@ -120,8 +127,10 @@ const ToDoInputBox = styled.div`
 `
 
 const ArrowBox = styled.button`
+    color: black;
     width: 32px;
-    height: 32px;
+    height: 30px;
+    display: flex;
     background-color: white;
     text-align : center;
     border-radius: 16px;

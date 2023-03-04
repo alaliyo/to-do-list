@@ -5,13 +5,13 @@ import { useState } from 'react';
 
 function ToDoList({ userObj, loggedIn, dispWidSize }) {
     const [lookupDate, setLookupDate] = useState("");
-    const getDate = (e) => { setLookupDate(e) }
+    const getDates = (e) => { setLookupDate(e) }
 
     return (
         <div>
             <HeaderTitle>To-Do-List</HeaderTitle>
             <ToDoListBox>
-                <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDate={getDate} />
+                <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDates={getDates} />
                 <ToDoListBody userObj={userObj} lookupDate={lookupDate} dispWidSize={dispWidSize} />
             </ToDoListBox>
         </div>
