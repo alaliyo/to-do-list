@@ -126,3 +126,14 @@
 <li> 반응형 디자인을 구성했지 않아서 어떻게 해야할지 고민 중... 원하는 기능 추가되면 그려봐야 할 듯...</li>
 </ol>
 </details>
+
+
+<h3>4. js date 내장함수의 ios에서 미지원 </h3>
+<details>
+<h4> - moment 라이브러리를 이용해 해결.</h4>
+<ol>
+<li>반응형을 만들고 안드로이드, ios 환경에서 잘 되는지 확인을 했는데 ios Date 내장함수 미지원으로 인한 오류 발생 <br />
+(해결) moment 라이브러리를 활용해서 해결했으며 Date 관련 많은 코드들이 수정되고 위치도 변경하여 history 링크를 남김</li>
+<a href="https://github.com/alaliyo/to-do-list/commit/a1ea3986f224c922527fc50f942ef3f68810a871">fix: ios에서 js date 함수들을 지원하지 않아 moment 라이브러리로 수정</a>
+</ol>
+</details>
