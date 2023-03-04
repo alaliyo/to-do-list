@@ -30,7 +30,7 @@ function UpdateContents({ userObj, loggedIn }) {
             { loggedIn && <>
             <VPageTitleBox>
                 <Stack direction="horizontal" gap={4}>
-                    <VPageTitle>Update History <VPageEx> (열을 클릭해 상세 내용을 확인하세요)</VPageEx></VPageTitle>
+                    <VPageTitle>Update History <br /><VPageEx>(열을 클릭해 상세 내용을 확인하세요)</VPageEx></VPageTitle>
                     { userObj.email === "des321321@naver.com" && <UpdateModal userObj={userObj} upListLen={updateList.length}></UpdateModal> }
                 </Stack>
             </VPageTitleBox >
@@ -43,7 +43,7 @@ function UpdateContents({ userObj, loggedIn }) {
                     </tr>
                 </thead>
                 {updateList.map((e, i) => (<>
-                    <Thead>
+                    <Thead key={i}>
                         <OverlayTrigger
                             trigger="click"
                             placement="bottom"
@@ -87,6 +87,9 @@ const TableBox = styled.div`
     padding: 20px;
     height: 70vh;
     margin: 0px 10%;
+    @media screen and (max-width: 768px){
+        margin: 0;
+    }
 `
 
 const ThWidth = styled.td`
