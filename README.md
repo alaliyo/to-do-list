@@ -26,12 +26,12 @@
       <li>업데이트 페이지 생성 및 버전 알림</li>
       <li>admin 계정 및 업데이트 테이블 및 계시물 생성</li>
       <li>비밀번호 변경 및 찾기, 계정 탈퇴 기능</li>
+      <li>모바일에서 접속 시 반응형으로 사용하기 편하게 디자인 변경</li>
     </details>
   </ol>
     <ol>
     <h3>(계획)</h3>
     <details>
-      <li>모바일에서 접속 시 반응형으로 사용하기 편하게 디자인 변경</li>
       <li>게시물 위치 변경 시 DB값 보내고 UX/UI 적용하는 부분 고민 밒 설계</li>
       <li>게시물 위치 변경 적옹하기</li>
       <li>완료하지 못한 스케줄 확인할 수 있는 페이지 완성</li>
@@ -99,6 +99,28 @@
         "destination": "/index.html"
       }
     ]
+```
+
+</ol>
+</details>
+
+
+<h3>3. 반응형 디자인</h3>
+<details>
+<h4> - 반응형 css는 공부만 해봤지 사용은 처음이다.</h4>
+<ol>
+<li>반응형이 처음이지만 css에 무난하게 적용을 했지만 js의 값을 변경하는 것을 못해 공부함. <br /> (해결) window.innerWidth를 사용해 크기 값을 주고 삼항연산자를 이용해 변경함.</li>
+<li>웹 크기가 바뀔 때마가 값을 실시간으로 반환해야 하는데 하는 방법을 몰라 useEffect []에 뭘 넣을지 고민함. <br /> (해결)</li>
+
+```
+  const [dispWidSize, setDispWidSize] = useState(window.innerWidth);
+
+  useEffect(()=> {
+    const windowResize = () => {
+      setDispWidSize(window.innerWidth)
+    }
+    window.addEventListener(`resize`, windowResize);
+  }, []);
 ```
 
 <li> 배포는 빌드를 한 후 빌드 파일을 올려야 적용이 된다.</li>
