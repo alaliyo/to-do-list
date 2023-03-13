@@ -9,7 +9,6 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
 
-
 function Header({ userObj, getDates }) {
     const [schedule, setSchedule] = useState('');
     const [scheduleDate, setScheduleDate] = useState(new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
@@ -39,6 +38,7 @@ function Header({ userObj, getDates }) {
         getDates(scheduleDate);
     }, [date, calenderDate]);
 
+    // 달 변경 시 반응
     useEffect(() => {
         if (date < 1) {
             setMonth(e => e - 1);
@@ -49,8 +49,9 @@ function Header({ userObj, getDates }) {
             setMaxDate((moment(`${year}/${month+1}/01`).endOf('month').format('D')));
             setDate(1);
         }
-    }, [date])
+    }, [date]);
 
+    // 연도 변경 시 반응
     useEffect(() => {
         if (month > 12) {
             setYear(e => e + 1);
@@ -69,7 +70,8 @@ function Header({ userObj, getDates }) {
         setCalenderDate(e.target.value);
         e.target.value = "";
     }
-
+    
+    // 리모컨으로 이동
     useEffect(() => {
         setScheduleDate(new Date(calenderDate).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-'));
         setMaxDate(Number(moment(calenderDate).endOf('month').format('D')));
@@ -78,7 +80,7 @@ function Header({ userObj, getDates }) {
         setDate(Number(moment(calenderDate).format('D')));
     }, [calenderDate]);
 
-    // POST 입력
+    // POST 
     const dataPost = async (e) => {
         e.preventDefault();
         try {

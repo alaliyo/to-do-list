@@ -11,12 +11,13 @@ function MyVerticallyCenteredModal( props ) {
   const [vContents, setVContents] = useState('');
   const onHide = props.onHide;
 
+  // input 데이터 분별
   const onChange = (e) => {
     const {
       target: { name, value },
-  } = e;
+    } = e;
   
-  if (name === "Num") {
+    if (name === "Num") {
       setVNumber(value);
     } else if (name === "title") {
       setVTitle(value);
@@ -25,21 +26,22 @@ function MyVerticallyCenteredModal( props ) {
     }
   }
   
+  // DB에 post 요청
   const dataPost = async (e) => {
-      e.preventDefault();
-      try {
-          await addDoc(collection(dbService, props.admin === null ? "to-do-list" : "version"), {
-            versId: props.upListLen + 1,
-            versionNum: vNumber,
-            versionTitle: vTitle,
-            versionContents: vContents
-      });
-      } catch (error) {
-      }
-      setVNumber("");
-      setVTitle("");
-      setVContents("");
-      onHide()
+    e.preventDefault();
+    try {
+        await addDoc(collection(dbService, props.admin === null ? "to-do-list" : "version"), {
+          versId: props.upListLen + 1,
+          versionNum: vNumber,
+          versionTitle: vTitle,
+          versionContents: vContents
+    });
+    } catch (error) {
+    }
+    setVNumber("");
+    setVTitle("");
+    setVContents("");
+    onHide()
   };
 
   return (

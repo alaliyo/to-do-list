@@ -12,6 +12,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [dispWidSize, setDispWidSize] = useState(window.innerWidth);
 
+  // 웹 키기 측정
   useEffect(()=> {
     const windowResize = () => {
       setDispWidSize(window.innerWidth)
@@ -19,6 +20,7 @@ function App() {
     window.addEventListener(`resize`, windowResize);
   }, []);
 
+  // 로그인 확인
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {

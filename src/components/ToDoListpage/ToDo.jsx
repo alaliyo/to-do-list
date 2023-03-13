@@ -15,6 +15,7 @@ function ToDo({ dispWidSize, toDoObj, isOwner, DateOwner, userObj }) {
     const [check, setCheck] = useState(toDoObj.check);
     const ToDoTextRef = doc(dbService, userObj === null ? "to-do-list" : userObj.email, `${toDoObj.id}`);
 
+    // 게시물 delete
     const onDeleteClick = async() => {
         const ok = window.confirm("삭제하시겠습니까?");
         if (ok) {
@@ -24,6 +25,7 @@ function ToDo({ dispWidSize, toDoObj, isOwner, DateOwner, userObj }) {
 
     const toggleEduting = () => setEdit((prev => !prev));
 
+    // 게시물 put
     const onPut = async(e) => {
         e.preventDefault();
         await updateDoc(ToDoTextRef, {
@@ -39,6 +41,7 @@ function ToDo({ dispWidSize, toDoObj, isOwner, DateOwner, userObj }) {
         setnewToDo(value);
     };
 
+    // 게시물 완료 여부 체크
     const onCheck = async(e) => {
         e.preventDefault();
         await updateDoc(ToDoTextRef, {

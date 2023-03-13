@@ -1,15 +1,24 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import ToDoListHeader from '../components/ToDoListpage/ToDoListHeader';
 import ToDoListBody from '../components/ToDoListpage/ToDoListBody';
-import { useState } from 'react';
+import Nav from 'react-bootstrap/Nav';
 
 function ToDoList({ userObj, loggedIn, dispWidSize }) {
     const [lookupDate, setLookupDate] = useState("");
-    const getDates = (e) => { setLookupDate(e) }
+    const getDates = (e) => { setLookupDate(e) };
 
     return (
         <div>
             <HeaderTitle>To-Do-List</HeaderTitle>
+            <Nav variant="pills" defaultActiveKey="/home">
+                <Nav.Item>
+                    <Nav.Link eventKey="link-2">List</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="link-1">Calender</Nav.Link>
+                </Nav.Item>
+            </Nav>
             <ToDoListBox>
                 <ToDoListHeader loggedIn={loggedIn} userObj={userObj} getDates={getDates} />
                 <ToDoListBody userObj={userObj} lookupDate={lookupDate} dispWidSize={dispWidSize} />

@@ -19,6 +19,7 @@ function FindPassword() {
         setFindPassword(value);
     }
 
+    // 비밀번호 찾기 요청
     const changePasswordUsingEmail = async () => {
       try {
         const auth = getAuth();

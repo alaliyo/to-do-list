@@ -11,7 +11,7 @@ import Table from 'react-bootstrap/Table';
 function UpdateContents({ userObj, loggedIn }) {
     const [updateList, setUpdateList] = useState([]);
 
-    // Get
+    // 스케줄 Get
     useEffect(() => {
         const q = query(
             collection(dbService, "version")

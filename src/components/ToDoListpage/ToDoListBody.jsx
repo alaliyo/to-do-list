@@ -6,7 +6,7 @@ import ToDo from "./ToDo";
 function ToDoListBody({ userObj, lookupDate, dispWidSize }) {
     const [toDoList, setToDoList] = useState([]);
 
-    // Get
+    // Get 게시물
     useEffect(() => {
         const q = query(
             collection(dbService, userObj === null ? "to-do-list" : userObj.email),
